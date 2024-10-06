@@ -1,15 +1,43 @@
-/* Генерация предсказания должна происходить при клике на кнопку «предсказать судьбу» */
+const container = document.querySelector(".forecasts");
+const forecastButton = document.querySelector('.forecast-btn');
+const forecastItem = document.querySelector('#forecast-item');
+const currentForecast = document.querySelector('.current-forecast');
 
-/* Заранее заготовь 3-5 предсказаний и в зависимости от того, как лягут карты судьбы (или что скажет Math.random) показывай их пользователю */
+forecastButton.addEventListener('click', function () {
+    let content = predict();
+    let resultForecast = numberGenerate(1, 100);
+    currentForecast.querySelector('h1').textContent = content;
+    currentForecast.querySelector('p').textContent = `Вероятность: ${resultForecast} %`;
+    container.prepend(makeItem(content, resultForecast));
+});
 
-/* Подставляй текст нового предсказания в .current-forecast h1 */
+function makeItem(textPrediction, resultPrediction) {
+    const item = forecastItem.content.cloneNode(true);
+    item.querySelector('h3').textContent = textPrediction;
+    item.querySelector('p').textContent = `Вероятность: ${resultPrediction} %`;
+    return item;
+}
 
-/* Показывай процент вероятности, с которым предсказание сбудется — в верстке это .current-forecast p */
+function predict() {
 
-/* Данный процент также нужно генерировать автоматически, он может принимать значения от 0 до 100% */
+    let textPrediction;
+    switch (numberGenerate(1, 4)) {
+        case 1:
+            textPrediction = 'Совсем скоро ожидается новое приятное знакомство';
+            break;
+        case 2:
+            textPrediction = 'Тебя ждет повышение';
+            break;
+        case 3:
+            textPrediction = 'Сбудется все, что задумано!';
+            break;
+        case 4:
+            textPrediction = 'Тебя ждет радостная новость!';
+            break;
+    }
+    return textPrediction;
+}
 
-/* Совет: заведи функцию-хелпер, которая будет заниматься только генерацией данных в диапазоне от min до max и используй ее где нужно */
-
-/* При генерации нового предсказания старое предсказание должно добавляться в начало списка «Мои предсказания» — .forecasts  */
-
-/* Для добавления предсказания в список воспользуйся шаблоном forecast-item */
+function numberGenerate(min, max) {
+    return Math.floor(Math.random() * (max - min)) + 1;
+}
