@@ -4,8 +4,8 @@ const forecastItem = document.querySelector('#forecast-item');
 const currentForecast = document.querySelector('.current-forecast');
 
 forecastButton.addEventListener('click', function () {
-    let content = predict();
-    let resultForecast = numberGenerate(1, 100);
+    const content = predict();
+    const resultForecast = numberGenerate(1, 101);
     currentForecast.querySelector('h1').textContent = content;
     currentForecast.querySelector('p').textContent = `Вероятность: ${resultForecast} %`;
     container.prepend(makeItem(content, resultForecast));
@@ -21,7 +21,7 @@ function makeItem(textPrediction, resultPrediction) {
 function predict() {
 
     let textPrediction;
-    switch (numberGenerate(1, 4)) {
+    switch (numberGenerate(1, 5)) {
         case 1:
             textPrediction = 'Совсем скоро ожидается новое приятное знакомство';
             break;
